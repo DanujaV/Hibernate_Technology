@@ -1,14 +1,35 @@
 package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.entity.Alien;
+import lk.ijse.hibernate.util.FactoryConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class AppInitializer {
     public static void main(String[] args) {
-        Alien alien = new Alien();
-        alien.setId("A001");
-        alien.setName("Kamal");
-        alien.setColour("Green");
 
-        save(alien);
+       /* Alien alien = new Alien();
+        alien.setId("A001");
+        alien.setName("Sumana");
+        alien.setColour("Pink");*/
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        /*session.save(alien);*/
+
+        // EAGER Fetching
+        /*Alien alien = session.get(Alien.class, "A001");
+        alien.setName("Sripala");*/
+
+
+        // Lazy Fetching
+        Alien alien = session.load(Alien.class, "A001");
+        System.out.println(alien.getName());
+
+        transaction.commit();
+
+        session.close();
     }
 }

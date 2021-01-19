@@ -1,6 +1,11 @@
 package lk.ijse.hibernate.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "Alien_Detail")
 public class Alien {
+    @Id
     private String id;
     private String name;
     private String colour;
