@@ -2,21 +2,34 @@ package lk.ijse.hibernate.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@Entity(name = "Alien_Detail")
+@Entity
 public class Alien {
     @Id
     private String id;
     private String name;
     private String colour;
 
+    @OneToOne
+    private Alien_SpaceCraft alien_spaceCraft;
+
     public Alien() {
     }
 
-    public Alien(String id, String name, String colour) {
+    public Alien(String id, String name, String colour, Alien_SpaceCraft alien_spaceCraft) {
         this.id = id;
         this.name = name;
         this.colour = colour;
+        this.alien_spaceCraft = alien_spaceCraft;
+    }
+
+    public Alien_SpaceCraft getAlien_spaceCraft() {
+        return alien_spaceCraft;
+    }
+
+    public void setAlien_spaceCraft(Alien_SpaceCraft alien_spaceCraft) {
+        this.alien_spaceCraft = alien_spaceCraft;
     }
 
     public String getId() {
@@ -49,6 +62,7 @@ public class Alien {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", colour='" + colour + '\'' +
+                ", alien_spaceCraft=" + alien_spaceCraft +
                 '}';
     }
 }

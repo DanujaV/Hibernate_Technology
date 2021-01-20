@@ -1,6 +1,7 @@
 package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.entity.Alien;
+import lk.ijse.hibernate.entity.Alien_SpaceCraft;
 import lk.ijse.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,8 +26,24 @@ public class AppInitializer {
 
 
         // Lazy Fetching
-        Alien alien = session.load(Alien.class, "A001");
+      /*  Alien alien = session.load(Alien.class, "A001");
         System.out.println(alien.getName());
+*/
+
+        // OneToMany
+        Alien_SpaceCraft alien_spaceCraft = new Alien_SpaceCraft();
+        alien_spaceCraft.setId("AS001");
+        alien_spaceCraft.setModel("circle");
+
+        Alien alien = new Alien();
+        alien.setId("A001");
+        alien.setName("Jadhu");
+        alien.setColour("Green");
+        alien.setAlien_spaceCraft(alien_spaceCraft);
+
+        session.save(alien);
+        session.save(alien_spaceCraft);
+
 
         transaction.commit();
 
