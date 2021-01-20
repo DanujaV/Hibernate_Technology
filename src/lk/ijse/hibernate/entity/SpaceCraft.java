@@ -4,17 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Alien_SpaceCraft {
+public class SpaceCraft {
     @Id
     private String id;
     private String model;
 
-    public Alien_SpaceCraft(String id, String model) {
+    public SpaceCraft(String id, String model) {
         this.id = id;
         this.model = model;
     }
 
-    public Alien_SpaceCraft() {
+    public SpaceCraft() {
     }
 
     public String getId() {

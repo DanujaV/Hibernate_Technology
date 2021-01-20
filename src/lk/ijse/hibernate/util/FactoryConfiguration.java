@@ -1,7 +1,7 @@
 package lk.ijse.hibernate.util;
 
-import lk.ijse.hibernate.entity.Alien;
-import lk.ijse.hibernate.entity.Alien_SpaceCraft;
+import lk.ijse.hibernate.entity.AlienOneToMany;
+import lk.ijse.hibernate.entity.SpaceCraftOneToMany;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -11,8 +11,10 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration(){
-        Configuration configuration = new Configuration().configure().addAnnotatedClass(Alien.class)
-                .addAnnotatedClass(Alien_SpaceCraft.class);
+        Configuration configuration = new Configuration().configure()/*addAnnotatedClass(Alien.class)
+                .addAnnotatedClass(SpaceCraft.class)*/
+                .addAnnotatedClass(AlienOneToMany.class)
+                .addAnnotatedClass(SpaceCraftOneToMany.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

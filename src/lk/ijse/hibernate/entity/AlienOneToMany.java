@@ -2,34 +2,37 @@ package lk.ijse.hibernate.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Alien {
+public class AlienOneToMany {
     @Id
     private String id;
     private String name;
     private String colour;
 
-    @OneToOne
-    private SpaceCraft spaceCraft;
+    @OneToMany(mappedBy = "alienOneToMany")
+    List<SpaceCraftOneToMany> spaceCraftOneToMany = new ArrayList<>();
 
-    public Alien() {
+    public AlienOneToMany() {
     }
 
-    public Alien(String id, String name, String colour, SpaceCraft spaceCraft) {
+    public AlienOneToMany(String id, String name, String colour, List<SpaceCraftOneToMany> spaceCraftOneToMany) {
         this.id = id;
         this.name = name;
         this.colour = colour;
-        this.spaceCraft = spaceCraft;
+        this.spaceCraftOneToMany = spaceCraftOneToMany;
     }
 
-    public SpaceCraft getSpaceCraft() {
-        return spaceCraft;
+    public List<SpaceCraftOneToMany> getSpaceCraftOneToMany() {
+        return spaceCraftOneToMany;
     }
 
-    public void setSpaceCraft(SpaceCraft spaceCraft) {
-        this.spaceCraft = spaceCraft;
+    public void setSpaceCraftOneToMany(List<SpaceCraftOneToMany> spaceCraftOneToMany) {
+        this.spaceCraftOneToMany = spaceCraftOneToMany;
     }
 
     public String getId() {
@@ -58,11 +61,11 @@ public class Alien {
 
     @Override
     public String toString() {
-        return "Alien{" +
+        return "AlienOnToMany{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", colour='" + colour + '\'' +
-                ", spaceCraft=" + spaceCraft +
+                ", spaceCraftOneToMany=" + spaceCraftOneToMany +
                 '}';
     }
 }

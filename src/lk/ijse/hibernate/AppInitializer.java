@@ -1,10 +1,15 @@
 package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.entity.Alien;
-import lk.ijse.hibernate.entity.Alien_SpaceCraft;
+import lk.ijse.hibernate.entity.AlienOneToMany;
+import lk.ijse.hibernate.entity.SpaceCraft;
+import lk.ijse.hibernate.entity.SpaceCraftOneToMany;
 import lk.ijse.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppInitializer {
     public static void main(String[] args) {
@@ -30,20 +35,49 @@ public class AppInitializer {
         System.out.println(alien.getName());
 */
 
-        // OneToMany
-        Alien_SpaceCraft alien_spaceCraft = new Alien_SpaceCraft();
-        alien_spaceCraft.setId("AS001");
-        alien_spaceCraft.setModel("circle");
+        // OneToOne
+        /*SpaceCraft spaceCraft = new SpaceCraft();
+        spaceCraft.setId("AS001");
+        spaceCraft.setModel("circle");
 
         Alien alien = new Alien();
         alien.setId("A001");
         alien.setName("Jadhu");
         alien.setColour("Green");
-        alien.setAlien_spaceCraft(alien_spaceCraft);
+        alien.setSpaceCraft(spaceCraft);
 
         session.save(alien);
-        session.save(alien_spaceCraft);
+        session.save(spaceCraft);
+*/
 
+        //OneToMany
+/*
+        AlienOneToMany firstAlien = new AlienOneToMany();
+        firstAlien.setId("A001");
+        firstAlien.setName("Jadhu");
+        firstAlien.setColour("Green");
+
+
+        SpaceCraftOneToMany firstCraft = new SpaceCraftOneToMany();
+        firstCraft.setId("CR001");
+        firstCraft.setModel("circle");
+
+        SpaceCraftOneToMany secondCraft = new SpaceCraftOneToMany();
+        secondCraft.setId("CR002");
+        secondCraft.setModel("Triangle");
+
+        List<SpaceCraftOneToMany> craftList = new ArrayList<>();
+        craftList.add(firstCraft);
+        craftList.add(secondCraft);
+
+        firstAlien.setSpaceCraftOneToMany(craftList);
+
+        firstCraft.setAlienOneToMany(firstAlien);
+        secondCraft.setAlienOneToMany(firstAlien);
+
+        session.save(firstCraft);
+        session.save(secondCraft);
+        session.save(firstAlien);*/
 
         transaction.commit();
 
