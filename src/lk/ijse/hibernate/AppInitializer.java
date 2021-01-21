@@ -4,6 +4,7 @@ import lk.ijse.hibernate.entity.*;
 import lk.ijse.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class AppInitializer {
 
         //ManyToMany
 
-        AlienManyToMany jadhu = new AlienManyToMany();
+        /*AlienManyToMany jadhu = new AlienManyToMany();
         jadhu.setId("A001");
         jadhu.setName("Jadhu");
         jadhu.setColour("Green");
@@ -113,10 +114,69 @@ public class AppInitializer {
         session.save(jadhu);
         session.save(kabhir);
         session.save(craft);
-        session.save(secondCraft);
+        session.save(secondCraft);*/
 
-        transaction.commit();
+
+        // HQL
+        /*
+        SpaceCraft firstCraft = new SpaceCraft();
+        firstCraft.setId("CR001");
+        firstCraft.setModel("circle");
+
+        SpaceCraft secondCraft = new SpaceCraft();
+        secondCraft.setId("CR002");
+        secondCraft.setModel("Triangle");
+
+        Alien firstAlien = new Alien();
+        firstAlien.setId("A001");
+        firstAlien.setName("Jadhu");
+        firstAlien.setColour("Green");
+        firstAlien.setSpaceCraft(firstCraft);
+
+        Alien secondAlien = new Alien();
+        secondAlien.setId("A002");
+        secondAlien.setName("Kabhir");
+        secondAlien.setColour("Blue");
+        secondAlien.setSpaceCraft(secondCraft);
+
+        session.save(firstAlien);
+        session.save(secondAlien);
+        session.save(firstCraft);
+        session.save(secondCraft);*/
+
+        /*Query alien = session.createQuery("from Alien ");
+        List <Alien> list = alien.list();
+
+        for (Alien alien1 : list) {
+            System.out.println(alien1);
+        }*/
+
+        //get result from the table( sql:- select * from Alien )
+        /*Query query = session.createQuery("from Alien");
+        List <Alien> list = query.list();
+
+        for (Alien alien : list) {
+            System.out.println(alien);
+        }*/
+
+        //get specific result set from the table. (specific row)
+        /*Query query = session.createQuery("from Alien where id = ?1");
+        query.setParameter(1, "A002");
+
+        Object o = query.uniqueResult();
+        System.out.println(o);*/
+
+        //get value from table only specific column
+        /*
+        Query query = session.createQuery("select name, colour from Alien where id = ?1");
+        query.setParameter(1,"A001");
+
+        Object[] o = (Object[]) query.uniqueResult();
+        System.out.println(o[0] + " - " + o[1]);
+*/
 
         session.close();
+
+
     }
 }
