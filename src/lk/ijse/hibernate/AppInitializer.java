@@ -2,12 +2,15 @@ package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.entity.*;
 import lk.ijse.hibernate.util.FactoryConfiguration;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AppInitializer {
     public static void main(String[] args) {
@@ -174,6 +177,27 @@ public class AppInitializer {
         Object[] o = (Object[]) query.uniqueResult();
         System.out.println(o[0] + " - " + o[1]);
 */
+
+
+        //Native code (if someone need to use Sql instead HQL, then use this method)
+        /*NativeQuery query = session.createSQLQuery("select  * from Alien");
+        query.addEntity(Alien.class);
+
+        List<Alien> list = query.list();
+
+        for (Alien alien : list) {
+            System.out.println(alien);
+        }*/
+
+        /*NativeQuery query = session.createSQLQuery("select name,colour from Alien");
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+
+        List <Object> list = query.list();
+        for (Object alien : list) {
+            Map map = (Map) alien;
+            System.out.println(map.get("name") + " - " + map.get("colour"));
+        }*/
+
 
         session.close();
 
